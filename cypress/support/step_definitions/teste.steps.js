@@ -21,6 +21,16 @@ Then(`deve exibir o título Learn na página`, () => {
    cy.get('h1').should('contain', 'Learn BDD and Cucumber');
 });
 
+When("eu adiciono um livro sem informar o título", () => {
+    cy.adicionarLivro('', 'Autor teste', 'Aventura', 2)
+})
+
+Then("o navegador deve impedir o cadastro por falta do título", () => {
+    cy.get('#book-title').then(($input) => {
+        expect($input[0].validity.valueMissing).to.be.true
+    })
+});
+
 
 
 
